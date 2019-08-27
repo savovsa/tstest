@@ -1,0 +1,14 @@
+{
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["import", "prettier", "@typescript-eslint"],
+    "rules": {
+      "semi": 0,
+      "comma-dangle": ["error", "always-multiline"]
+    }
+  }
