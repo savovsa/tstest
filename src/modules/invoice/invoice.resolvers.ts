@@ -1,9 +1,32 @@
-export default {
-  User: {
-    id: (user: any) => user.id,
-    name: (user: any) => user.name,
+import { Resolvers, UnitType } from '../generated'
+
+const resolvers: Resolvers = {
+  Invoice: {
+    id: invoice => invoice.id,
   },
+
   Query: {
-    currentUser: () => ({ id: 1, name: 'Sasho' }),
+    invoiceById: () => ({
+      id: '001',
+      date: '2019-08-01',
+      client: {
+        id: '01',
+        name: 'Maki',
+      },
+      items: [
+        {
+          id: '001',
+          name: 'Programata na Muncho',
+          unitType: UnitType.Pc,
+          price: 1200.0,
+        },
+      ],
+      user: {
+        id: '1',
+        name: 'Sasho',
+      },
+    }),
   },
 }
+
+export default resolvers

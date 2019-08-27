@@ -1,9 +1,13 @@
-export default {
+import { Resolvers, User } from '../generated'
+
+const resolvers: Resolvers = {
   User: {
-    id: (user: any) => user.id,
-    name: (user: any) => user.name,
+    id: (user: User) => user.id,
+    name: (user: User) => user.name || '',
   },
   Query: {
-    currentUser: () => ({ id: 1, name: 'Sasho' }),
+    currentUser: () => ({ id: '1', name: 'Sasho' }),
   },
 }
+
+export default resolvers

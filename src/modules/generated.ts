@@ -9,6 +9,10 @@ export type Scalars = {
   Boolean: boolean,
   Int: number,
   Float: number,
+  /** 
+ * Date in ISO 8601 format
+   * https://en.wikipedia.org/wiki/ISO_8601
+ **/
   Date: any,
 };
 
@@ -48,9 +52,9 @@ export type QueryInvoiceByIdArgs = {
 };
 
 export enum UnitType {
-  Pc = 'pc',
-  Kg = 'kg',
-  L = 'l'
+  Pc = 'PC',
+  Kg = 'KG',
+  L = 'L'
 }
 
 export type User = {

@@ -9,6 +9,10 @@ export default gql`
     user: User
   }
 
+  """
+  Date in ISO 8601 format
+  https://en.wikipedia.org/wiki/ISO_8601
+  """
   scalar Date
 
   type Client {
@@ -24,9 +28,9 @@ export default gql`
   }
 
   enum UnitType {
-    pc
-    kg
-    l
+    PC
+    KG
+    L
   }
 
   extend type Query {
