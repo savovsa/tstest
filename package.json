@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "lint": "tsc --noEmit && eslint 'src/**' --fix"
+    "lint": "tsc --noEmit && eslint 'src/**' --fix",
+    "codegen": "graphql-codegen",
+    "prestart": "yarn codegen",
+    "prebuild": "yarn codegen"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.10",
@@ -19,6 +22,9 @@
     "typescript": "^3.5.3"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.6.1",
+    "@graphql-codegen/typescript": "^1.6.1",
+    "@graphql-codegen/typescript-resolvers": "^1.6.1",
     "@types/graphql": "^14.5.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
