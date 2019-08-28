@@ -1,10 +1,6 @@
 import { Resolvers, UnitType } from '../generated'
 
 const resolvers: Resolvers = {
-  Invoice: {
-    id: invoice => invoice.id,
-  },
-
   Query: {
     invoiceById: () => ({
       id: '001',

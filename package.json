@@ -8,7 +8,10 @@
     "lint": "tsc --noEmit && eslint 'src/**' --fix",
     "codegen": "graphql-codegen",
     "prestart": "yarn codegen",
-    "prebuild": "yarn codegen"
+    "prebuild": "yarn codegen",
+    "db:migrate": "knex migrate:latest",
+    "db:rollback": "knex migrate:rollback",
+    "db:createMigration": "knex migrate:make -x ts"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.10",
@@ -17,7 +20,9 @@
     "apollo-server-express": "^2.9.0",
     "express": "^4.17.1",
     "graphql": "^14.5.3",
+    "knex": "^0.19.2",
     "nodemon": "^1.19.1",
+    "pg": "^7.12.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
@@ -26,6 +31,7 @@
     "@graphql-codegen/typescript": "^1.6.1",
     "@graphql-codegen/typescript-resolvers": "^1.6.1",
     "@types/graphql": "^14.5.0",
+    "@types/knex": "^0.16.1",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.2.2",
