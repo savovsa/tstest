@@ -40,6 +40,16 @@ export type InvoiceItem = {
   price?: Maybe<Scalars['Float']>,
 };
 
+export type Mutation = {
+  __typename?: 'Mutation',
+  register?: Maybe<Scalars['Boolean']>,
+};
+
+
+export type MutationRegisterArgs = {
+  user: User
+};
+
 export type Query = {
   __typename?: 'Query',
   invoiceById?: Maybe<Invoice>,
@@ -143,6 +153,7 @@ export type ResolversTypes = {
   UnitType: UnitType,
   Float: ResolverTypeWrapper<Scalars['Float']>,
   User: ResolverTypeWrapper<User>,
+  Mutation: ResolverTypeWrapper<{}>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 };
 
@@ -158,6 +169,7 @@ export type ResolversParentTypes = {
   UnitType: UnitType,
   Float: Scalars['Float'],
   User: User,
+  Mutation: {},
   Boolean: Scalars['Boolean'],
 };
 
@@ -185,6 +197,10 @@ export type InvoiceItemResolvers<ContextType = ModuleContext, ParentType extends
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
 };
 
+export type MutationResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  register?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, 'user'>>,
+};
+
 export type QueryResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   invoiceById?: Resolver<Maybe<ResolversTypes['Invoice']>, ParentType, ContextType, RequireFields<QueryInvoiceByIdArgs, 'id'>>,
   currentUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
@@ -200,6 +216,7 @@ export type Resolvers<ContextType = ModuleContext> = {
   Date?: GraphQLScalarType,
   Invoice?: InvoiceResolvers<ContextType>,
   InvoiceItem?: InvoiceItemResolvers<ContextType>,
+  Mutation?: MutationResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
 };

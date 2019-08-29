@@ -9,4 +9,12 @@ export default gql`
   type Query {
     currentUser: User
   }
+
+  input RegisterInputUser {
+    name: String
+  }
+
+  type Mutation {
+    register(user: RegisterInputUser!): Boolean
+  }
 `

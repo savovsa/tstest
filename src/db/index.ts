@@ -15,9 +15,9 @@ export const config = {
   },
 }
 
-const instance: Knex = Knex(config as Knex.Config)
+export const connection: Knex = Knex(config as Knex.Config)
 
-instance
+connection
   .raw('select 1')
   .then(() => {
     console.log(`Connected to database - OK`)
@@ -28,7 +28,7 @@ instance
     process.exit(1)
   })
 
-export const db = () => instance
+export const db = () => connection
 
 // Returns a timestamp suitable for inserting into Postgres
 
