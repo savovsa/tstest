@@ -16,6 +16,10 @@ export type Scalars = {
   Date: any,
 };
 
+export type AddClientInput = {
+  name?: Maybe<Scalars['String']>,
+};
+
 export type Client = {
   __typename?: 'Client',
   id: Scalars['ID'],
@@ -32,33 +36,74 @@ export type Invoice = {
   user?: Maybe<User>,
 };
 
+export type InvoiceInput = {
+  date: Scalars['Date'],
+  clientId: Scalars['ID'],
+  items: Array<InvoiceItemInput>,
+};
+
 export type InvoiceItem = {
   __typename?: 'InvoiceItem',
   id: Scalars['ID'],
   name?: Maybe<Scalars['String']>,
+  quantity?: Maybe<Scalars['Float']>,
   unitType?: Maybe<UnitType>,
   price?: Maybe<Scalars['Float']>,
 };
 
+export type InvoiceItemInput = {
+  id: Scalars['ID'],
+  quantity: Scalars['Float'],
+  price: Scalars['Float'],
+};
+
 export type Mutation = {
   __typename?: 'Mutation',
+  addClient?: Maybe<Scalars['Boolean']>,
+  addInvoice?: Maybe<Scalars['Boolean']>,
   register?: Maybe<Scalars['Boolean']>,
 };
 
 
+export type MutationAddClientArgs = {
+  client: AddClientInput
+};
+
+
+export type MutationAddInvoiceArgs = {
+  invoice: InvoiceInput
+};
+
+
 export type MutationRegisterArgs = {
-  user: User
+  user: RegisterInputUser
 };
 
 export type Query = {
   __typename?: 'Query',
-  invoiceById?: Maybe<Invoice>,
+  getClientById?: Maybe<Array<Maybe<Client>>>,
+  getInvoiceById?: Maybe<Invoice>,
   currentUser?: Maybe<User>,
+  getUserById?: Maybe<Array<Maybe<User>>>,
 };
 
 
-export type QueryInvoiceByIdArgs = {
+export type QueryGetClientByIdArgs = {
   id: Scalars['ID']
+};
+
+
+export type QueryGetInvoiceByIdArgs = {
+  id: Scalars['ID']
+};
+
+
+export type QueryGetUserByIdArgs = {
+  id: Scalars['ID']
+};
+
+export type RegisterInputUser = {
+  name: Scalars['String'],
 };
 
 export enum UnitType {
@@ -145,32 +190,40 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
   ID: ResolverTypeWrapper<Scalars['ID']>,
-  Invoice: ResolverTypeWrapper<Invoice>,
-  Date: ResolverTypeWrapper<Scalars['Date']>,
   Client: ResolverTypeWrapper<Client>,
   String: ResolverTypeWrapper<Scalars['String']>,
+  Invoice: ResolverTypeWrapper<Invoice>,
+  Date: ResolverTypeWrapper<Scalars['Date']>,
   InvoiceItem: ResolverTypeWrapper<InvoiceItem>,
-  UnitType: UnitType,
   Float: ResolverTypeWrapper<Scalars['Float']>,
+  UnitType: UnitType,
   User: ResolverTypeWrapper<User>,
   Mutation: ResolverTypeWrapper<{}>,
+  AddClientInput: AddClientInput,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  InvoiceInput: InvoiceInput,
+  InvoiceItemInput: InvoiceItemInput,
+  RegisterInputUser: RegisterInputUser,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {},
   ID: Scalars['ID'],
-  Invoice: Invoice,
-  Date: Scalars['Date'],
   Client: Client,
   String: Scalars['String'],
+  Invoice: Invoice,
+  Date: Scalars['Date'],
   InvoiceItem: InvoiceItem,
-  UnitType: UnitType,
   Float: Scalars['Float'],
+  UnitType: UnitType,
   User: User,
   Mutation: {},
+  AddClientInput: AddClientInput,
   Boolean: Scalars['Boolean'],
+  InvoiceInput: InvoiceInput,
+  InvoiceItemInput: InvoiceItemInput,
+  RegisterInputUser: RegisterInputUser,
 };
 
 export type ClientResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Client'] = ResolversParentTypes['Client']> = {
@@ -193,17 +246,22 @@ export type InvoiceResolvers<ContextType = ModuleContext, ParentType extends Res
 export type InvoiceItemResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['InvoiceItem'] = ResolversParentTypes['InvoiceItem']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  quantity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
   unitType?: Resolver<Maybe<ResolversTypes['UnitType']>, ParentType, ContextType>,
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>,
 };
 
 export type MutationResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addClient?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAddClientArgs, 'client'>>,
+  addInvoice?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAddInvoiceArgs, 'invoice'>>,
   register?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, 'user'>>,
 };
 
 export type QueryResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  invoiceById?: Resolver<Maybe<ResolversTypes['Invoice']>, ParentType, ContextType, RequireFields<QueryInvoiceByIdArgs, 'id'>>,
+  getClientById?: Resolver<Maybe<Array<Maybe<ResolversTypes['Client']>>>, ParentType, ContextType, RequireFields<QueryGetClientByIdArgs, 'id'>>,
+  getInvoiceById?: Resolver<Maybe<ResolversTypes['Invoice']>, ParentType, ContextType, RequireFields<QueryGetInvoiceByIdArgs, 'id'>>,
   currentUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
+  getUserById?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>,
 };
 
 export type UserResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

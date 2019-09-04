@@ -6,11 +6,11 @@ const userModel = new UserModel(connection)
 
 const resolvers: Resolvers = {
   User: {
-    id: (user: User) => user.id,
     name: (user: User) => user.name || '',
   },
   Query: {
     currentUser: () => ({ id: '1', name: 'Sasho' }),
+    getUserById: (_, args) => userModel.getById(args.id),
   },
   Mutation: {
     register: async (_, args) => {

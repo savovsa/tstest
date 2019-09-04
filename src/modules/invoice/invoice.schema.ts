@@ -15,14 +15,10 @@ export default gql`
   """
   scalar Date
 
-  type Client {
-    id: ID!
-    name: String
-  }
-
   type InvoiceItem {
     id: ID!
     name: String
+    quantity: Float
     unitType: UnitType
     price: Float
   }
@@ -34,6 +30,22 @@ export default gql`
   }
 
   extend type Query {
-    invoiceById(id: ID!): Invoice
+    getInvoiceById(id: ID!): Invoice
+  }
+
+  input InvoiceItemInput {
+    id: ID!
+    quantity: Float!
+    price: Float!
+  }
+
+  input InvoiceInput {
+    date: Date!
+    clientId: ID!
+    items: [InvoiceItemInput!]!
+  }
+
+  extend type Mutation {
+    addInvoice(invoice: InvoiceInput!): Boolean
   }
 `

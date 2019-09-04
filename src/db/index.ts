@@ -27,9 +27,3 @@ connection
 
     process.exit(1)
   })
-
-export const db = () => connection
-
-// Returns a timestamp suitable for inserting into Postgres
-
-export const timestamp = (): string => new Date().toUTCString()
