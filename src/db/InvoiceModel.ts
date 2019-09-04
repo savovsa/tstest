@@ -6,7 +6,7 @@ export default class InvoiceModel extends DataModel {
     const { date, clientId, items } = invoice
 
     // https://wesbos.com/destructuring-renaming/
-    const { id: invoiceId } = await this.connection
+    const [{ id: invoiceId }] = await this.connection
       .insert({ date, clientId })
       .into('invoice')
       .returning('*')
