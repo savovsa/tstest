@@ -8,14 +8,18 @@ export default gql`
 
   type Query {
     currentUser: User
-    getUserById(id: ID!): [User]
+    getUserById(id: ID!): User
   }
 
   input RegisterInputUser {
+    # Full name
     name: String!
+    email: String!
+    password: String!
   }
 
   type Mutation {
     register(user: RegisterInputUser!): Boolean
+    login(email: String!, password: String!): String!
   }
 `

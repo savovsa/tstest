@@ -14,6 +14,8 @@ const resolvers: Resolvers = {
   },
   Mutation: {
     register: async (_, args) => {
+      console.log(args)
+
       try {
         await userModel.create(args.user)
         return true
@@ -21,6 +23,13 @@ const resolvers: Resolvers = {
         console.error(error)
         return false
       }
+    },
+    login: async (_, args) => {
+      console.log(args)
+      // check user exists
+      // check password
+
+      return `Hello ${args.email}`
     },
   },
 }

@@ -1,14 +1,18 @@
 {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier",
-      "prettier/@typescript-eslint"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["import", "prettier", "@typescript-eslint"],
-    "rules": {
-      "semi": 0,
-      "comma-dangle": ["error", "always-multiline"]
-    }
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "prettier", "@typescript-eslint"],
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "semi": 0,
+    "comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
+}

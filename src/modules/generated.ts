@@ -62,6 +62,7 @@ export type Mutation = {
   addClient?: Maybe<Scalars['Boolean']>,
   addInvoice?: Maybe<Scalars['Boolean']>,
   register?: Maybe<Scalars['Boolean']>,
+  login: Scalars['String'],
 };
 
 
@@ -79,12 +80,18 @@ export type MutationRegisterArgs = {
   user: RegisterInputUser
 };
 
+
+export type MutationLoginArgs = {
+  email: Scalars['String'],
+  password: Scalars['String']
+};
+
 export type Query = {
   __typename?: 'Query',
   getClientById?: Maybe<Array<Maybe<Client>>>,
   getInvoiceById?: Maybe<Invoice>,
   currentUser?: Maybe<User>,
-  getUserById?: Maybe<Array<Maybe<User>>>,
+  getUserById?: Maybe<User>,
 };
 
 
@@ -104,6 +111,8 @@ export type QueryGetUserByIdArgs = {
 
 export type RegisterInputUser = {
   name: Scalars['String'],
+  email: Scalars['String'],
+  password: Scalars['String'],
 };
 
 export enum UnitType {
@@ -255,13 +264,14 @@ export type MutationResolvers<ContextType = ModuleContext, ParentType extends Re
   addClient?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAddClientArgs, 'client'>>,
   addInvoice?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAddInvoiceArgs, 'invoice'>>,
   register?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, 'user'>>,
+  login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>,
 };
 
 export type QueryResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getClientById?: Resolver<Maybe<Array<Maybe<ResolversTypes['Client']>>>, ParentType, ContextType, RequireFields<QueryGetClientByIdArgs, 'id'>>,
   getInvoiceById?: Resolver<Maybe<ResolversTypes['Invoice']>, ParentType, ContextType, RequireFields<QueryGetInvoiceByIdArgs, 'id'>>,
   currentUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
-  getUserById?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>,
+  getUserById?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>,
 };
 
 export type UserResolvers<ContextType = ModuleContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
