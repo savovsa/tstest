@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.ts",
+    "test": "jest -c jest.config.unit.js",
+    "itest": "jest -c jest.config.integration.js",
     "lint": "tsc --noEmit && eslint 'src/**' --fix",
     "codegen": "graphql-codegen",
     "db:migrate": "knex migrate:latest",
@@ -12,13 +14,19 @@
     "db:createMigration": "knex migrate:make -x ts"
   },
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
     "@graphql-modules/core": "^0.7.10",
     "@types/express": "^4.17.1",
+    "@types/jest": "^25.2.1",
     "@types/node": "^12.7.2",
     "apollo-server-express": "^2.9.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^14.5.3",
+    "jest": "^25.2.7",
     "knex": "^0.19.2",
     "nodemon": "^1.19.1",
     "pg": "^7.12.1",
